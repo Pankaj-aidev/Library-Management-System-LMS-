@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Issued Books</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h2>Issued Books</h2>
+  <a href="/books">Back to Books</a><br><br>
+  {% if issued %}
+    <table border="1">
+      <tr><th>Title</th><th>Issued To</th></tr>
+      {% for title, details in issued.items() %}
+        <tr>
+          <td>{{ title }}</td>
+          <td>{{ details['issued_to'] }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>No books are currently issued.</p>
+  {% endif %}
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>📚 Library Management System</h1>
+        {% if session.get('username') %}
+        <nav>
+            <a href="{{ url_for('books') }}">View Books</a>
+            <a href="{{ url_for('add_book') }}">Add Book</a>
+            <a href="{{ url_for('issue_book') }}">Issue</a>
+            <a href="{{ url_for('return_book') }}">Return</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+        {% endif %}
+    </header>
+
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <p class="flash {{ category }}">{{ message }}</p>
+            {% endfor %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
